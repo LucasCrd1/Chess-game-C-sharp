@@ -32,7 +32,7 @@ namespace ChessGame.Entities._Board
             return Piece(pos) != null;
         }
 
-        public void PutPiece(Piece p, Position pos)
+        public void AddPiece(Piece p, Position pos)
         {
             if (IsTherePiece(pos))
             {
@@ -41,6 +41,21 @@ namespace ChessGame.Entities._Board
             
             Pieces[pos.Line, pos.Column] = p;
             p.Position = pos;
+        }
+
+        public Piece RemovePiece(Position pos)
+        {
+            if (Piece(pos) == null )
+            {
+                return null;
+            }
+            else
+            {
+                Piece aux = Piece(pos);
+                aux.Position = null;
+                Pieces[pos.Line, pos.Column] = null;
+                return aux;
+            }
         }
 
         public bool ValidPosition(Position pos)

@@ -1,5 +1,5 @@
 ﻿using ChessGame.Entities._Board;
-using ChessGame.Entities.ChessGame;
+using ChessGame.Entities.Chess;
 using ChessGame.Entities.Enums;
 using ChessGame.Entities.Exceptions;
 using ChessGame.Views;
@@ -12,12 +12,26 @@ namespace ChessGame
         {
             try
             {
-                Board board = new Board(8, 8);
-                board.PutPiece(new Rook(Color.Black, board), new Position(0, 0));
-                board.PutPiece(new Rook(Color.Black, board), new Position(1, 3));
-                board.PutPiece(new King(Color.Black, board), new Position(2, 4));
+                ChessMatch match = new ChessMatch();
 
-                ViewBoard.PrintBoard(board);
+                while (!match.Finished)
+                {
+                    Console.Clear();
+                    ViewBoard.PrintBoard(match.Board);
+
+                    Console.WriteLine();
+                    Console.Write("Origin: ");
+                    Position origin = ViewBoard.ReadChessPosition().ToPosition();
+
+                    Console.Write("Destination: ");
+                    Position destination = ViewBoard.ReadChessPosition().ToPosition();
+
+                    match.MakeMove(origin, destination);
+                }
+
+                ViewBoard.PrintBoard(match.Board);
+
+
             }
             catch (BoardException e)
             {

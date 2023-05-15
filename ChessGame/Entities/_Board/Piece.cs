@@ -19,5 +19,9 @@ namespace ChessGame.Entities._Board
             Board = board;
         }
 
+        public void IncreaseMovements()
+        {
+            Movements++; 
+        }
     }
 }
